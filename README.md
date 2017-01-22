@@ -21,5 +21,7 @@ Most production WordPress servers will implement some kind of policy that will p
 ##To-Do
 
 -Add the ability to take command parameters
+
 -Right now the script determines success by checking for a lack of the string "ERROR" in the server response. It would be better to check for something positive, like "logout" as sometimes you run into a page that is not successful but does not contain the string "ERROR". (For instance, being blocked for too many login attempts often does not relay the string "ERROR".
+
 -Add a time-out option to prevent overloading servers and raising red flags.  
