@@ -19,15 +19,17 @@ class Login{
 		curl_close($ch);
 		return $result;
 	}
-	function TestCreds($url,$post,$log,$pwd,$error){
+	function TestCreds($url,$post,$log,$pwd,$error_list){
 		$result = $this->Request($url,$post);
-		if (strpos($result, $error) == true){
-			echo "[Login/Password] Combo: [$log,$pwd] is seemingly invalid. \n";
-			return false;
+		foreach ($error_list as &$check_error) {
+			if (stripos($result, $check_error) == true){
+				//echo "[Login/Password] Combo: [$log,$pwd] is seemingly invalid. \n";
+				$new_error = $check_error;
+				return $new_error;
+			}
 		}
-		else{
-			echo "*******\nSUCCESS!\nCredential combiniation is viable.\nFound [Login/Password] Combo: [$log,$pwd]\n*******\n";
-			return true;
+		if (isset($new_error)==false){
+			return false;
 		}
 	}
 }
